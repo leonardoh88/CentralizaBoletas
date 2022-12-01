@@ -1,0 +1,73 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static '/CSS/style.css' %}">
+    <title>Boletas RODA Energía</title>
+
+</head>
+<body>
+
+    <div class="head">
+
+        <div class="logo">
+            <a href="https://www.rodaenergia.cl/" target="_blank"><img id="logoRODA" src="https://www.rodaenergia.cl/web/image/res.company/1/logo" alt="Logo RODA ENERGÍA"></a>
+        </div>
+
+        <nav class="navbar">
+            <a href="http://localhost:8000/">Inicio</a>
+            {% if perms.group.add_group %}
+            <a href="http://localhost:8000/admin">Menú Admin</a>
+            <a target="_blank" href="http://localhost:8000/api">API</a>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <a href="http://localhost:8000/sucursales">Sucursales</a>
+            <a href="{% url 'logout' %}">CERRAR SESIÓN</a>
+            <a href="#">@{{ user.username }}</a>
+            {% else %}
+            <a href="{% url 'login' %}">Iniciar Sesión</a>
+            {% endif %}
+        </nav>
+    </div>
+    <header id = "headerLogin">
+        <h1 id ="h1Login">Listado metadatos de las Boletas</h1>
+    </header>
+    <table id="listare">
+        <tr id="titulosl">
+            <th>Folio</th>
+            <th>RutEmisor</th>
+            <th>RutReceptor</th>
+            <th>TipoServicio</th>
+            <th>Año</th>
+            <th>Mes</th>
+            <th>Día</th>
+            <th>Comentario</th>
+            <th>Comentar</th>
+        </tr>
+        {% for p in boletas %}
+        
+        <tr id="metadatos">
+            <td>{{ p.folio }}</td>
+            <td>{{ p.rut_emisor }}</td>
+            <td>{{ p.rut_receptor }}</td>
+            <td>{{ p.tipo_servicio }}</td>
+            <td>{{ p.anio_doc }}</td>
+            <td>{{ p.mes_doc }}</td>
+            <td>{{ p.dia_doc }}</td>
+            <td>{{ p.comentario}}</td>
+            <td >
+                <a id="delista1" href="{% url 'modificar' p.id %}">Comentar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <footer class="content contact">
+        <h1 Class="title">¡GRACIAS POR USAR RODA ENERGIA!</h1>
+    </footer>
+</body>
+</html>

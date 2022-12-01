@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static '/CSS/style.css' %}">
+    <title>Inicio RODA Energía</title>
+
+</head>
+<body>
+
+    <div class="head">
+
+        <div class="logo">
+            <a href="https://www.rodaenergia.cl/" target="_blank"><img id="logoRODA" src="https://www.rodaenergia.cl/web/image/res.company/1/logo" alt="Logo RODA ENERGÍA"></a>
+        </div>
+
+        <nav class="navbar">
+            {% if perms.group.add_group %}
+            <a href="http://localhost:8000/admin">Menú Admin</a>
+            <a target="_blank" href="http://localhost:8000/api">API</a>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <a href="http://localhost:8000/boletas">Boletas</a>
+            <a href="http://localhost:8000/sucursales">Sucursales</a>
+            <a href="{% url 'logout' %}">CERRAR SESIÓN</a>
+            <a href="#">@{{ user.username }}</a>
+            {% else %}
+            <a href="{% url 'login' %}">Iniciar Sesión</a>
+            {% endif %}
+        </nav>
+
+    </div>
+    <header class="content header">
+        <h2 class="title">RODA ENERGIA</h2>
+        <p>
+            RODA ENERGÍA es una compañía especialista en eficiencia energética y dispone de un conjunto de servicios orientados
+            fundamentalmente a empresas grandes y medianas.
+        </p>
+        <p>En este caso nuestro cliente encargado de entregar los requerimientos fue Francisco Savignone.</p>
+    </header>
+
+    <section class="content sau">
+        <h2 id="tituloProyecto" class="title">Proyecto</h2>
+        <p>"Centralizador de Boletas"</p>
+        <p>Elaborado por Alumnos de Duoc UC</p>
+        <a href="https://www.duoc.cl/" target="_blank"><img id="imgDuoc" src="https://ingeniosas.org/wp-content/uploads/2020/06/Duoc.png" alt="Logo duoc"></a>  
+    </section>
+    <section class="content price">
+        <article class="contain">
+            <h2 class="title">¡Versión no Oficial!</h2>
+            <p>!La versión Oficial será implementada junto a Odoo¡</p>
+            <a href="https://www.odoo.com/es_ES" target="_blank"><img src="https://www.odoo.com/web/image/website/1/social_default_image?unique=8f9cd72" height="60px" width="30%" alt="Logo Odoo"></a>
+        </article>
+    </section>
+
+    <section class="content contact">
+        <h2 class="title">Contacto</h2>
+        <p>Teléfono: +56227177141</p>
+        <figure class="map">
+            <a href="https://www.rodaenergia.cl/" target="_blank"><img src="https://www.rodaenergia.cl/web/image/res.company/1/logo" height="65px" width="100%" alt="Logo RODA ENERGIA"></a>
+        </figure>
+    </section>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static '/CSS/style.css' %}">
+    <title>Inicio de Sesión</title>
+
+</head>
+<body>
+
+    <div class="head">
+
+        <div class="logo">
+            <a href="https://www.rodaenergia.cl/" target="_blank"><img id="logoRODA" src="https://www.rodaenergia.cl/web/image/res.company/1/logo" alt="Logo RODA ENERGÍA"></a>
+        </div>
+
+        <nav class="navbar">
+            <a href="http://localhost:8000/">Inicio</a>
+            {% if perms.group.add_group %}
+            <a href="http://localhost:8000/admin">Menú Admin</a>
+            <a target="_blank" href="http://localhost:8000/api">API</a>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <a href="http://localhost:8000/boletas">Boletas</a>
+            <a href="http://localhost:8000/sucursales">Sucursales</a>
+            <a href="{% url 'logout' %}">CERRAR SESIÓN</a>
+            <a href="#">@{{ user.username }}</a>
+            {% endif %}
+        </nav>
+    </div>
+    <header id = "headerLogin">
+        <h1 id ="h1Login">INICIAR SESIÓN EN RODA ENERGÍA</h1>
+    </header>
+    <section id="secComentario" class="content sau">
+        <form action="" method="post">
+            <!--<p id="login1">Usuario</p>
+            <p id="login2">Contraseña</p>-->
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" id="botoninicio" name="botoninicio" value="INICIAR SESIÓN">
+        </form>
+    </section>
+    <section class="content price">
+
+        <article class="contain">
+            <h2 class="title">Gracias por visitar la nuestra página</h2>
+            <p>ATENTAMENTE RODA ENERGIA :)</p>
+        </article>
+</body>
+</html>
